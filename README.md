@@ -7,7 +7,7 @@ Backend app for the Polygon 8 site
 Requires Python 3.6x and Pipenv. [See here for help](https://djangoforbeginners.com/initial-setup/).
 
 ```
-$ git clone https://github.com/plygon8/benzaiten.git
+$ git clone https://github.com/polygon8/benzaiten.git
 $ cd benzaiten
 $ pipenv install
 $ pipenv shell # activates the virtualenv
