@@ -1,11 +1,15 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import RegexValidator
+from django.urls import reverse
 
 
 class CustomUser(AbstractUser):
     name = models.CharField(blank=True, max_length=255)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('profile', kwargs={'user_id': self.pk})
 
     def __str__(self):
         return self.email

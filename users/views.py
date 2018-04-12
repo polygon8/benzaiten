@@ -26,3 +26,9 @@ class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'account/signup.html'
+
+
+class CustomUserChangeForm(generic.UpdateView):
+    model = CustomUser
+    fields = ['name', 'email']
+    template_name = 'account/edit_profile.html'

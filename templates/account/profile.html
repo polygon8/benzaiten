@@ -3,33 +3,31 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-<h3>Profile</h3>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <div class="container">
+  <h3>Profile</h3>
   <ul class="list-group">
     <li class="list-group-item">Name: {{ user.name }}</li>
     <li class="list-group-item">Email: {{ user.email }}</li>
     <li class="list-group-item">Updated at: {{ user.updated_at }}</li>
     <li class="list-group-item">Member since: {{ user.date_joined }}</li>
   </ul>
+  <a class="btn btn-primary mt-2" href={% url 'edit-profile' user.id %} role="button">Edit</a>
 </div>
-<br>
 
-<h3>Pseudonyms</h3>
-<div class="container">
+<div class="container mt-5">
+  <h3>Pseudonyms</h3>
   <ul class="list-group">
     {% for pseudonym in pseudonyms %}
     <li class="list-group-item">{{ pseudonym.name }}</li>
     {% endfor %}
   </ul>
 </div>
-<br>
 
-<h3>IPI Numbers</h3>
-
-<div class="container">
+<div class="container mt-5">
+  <h3>IPI Numbers</h3>
   <ul class="list-group">
     {% for ipi_number in ipi_numbers %}
     <li class="list-group-item">{{ ipi_number.number }}</li>
