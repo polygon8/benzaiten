@@ -1,0 +1,16 @@
+language: python
+python:
+  - '3.6'
+services:
+  - postgresql
+before_install:
+  - psql -c 'create database benzaiten;' -U postgres
+env:
+  - PIPENV_IGNORE_VIRTUALENVS=1
+install:
+  - make install
+  - make migrate
+script:
+  - make test
+notifications:
+  email: false
