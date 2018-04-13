@@ -1,5 +1,7 @@
 # Benzaiten
 
+[![Build Status](https://api.travis-ci.org/polygon8/benzaiten.svg?branch=master)](https://travis-ci.org/polygon8/benzaiten)
+
 Backend app for the Polygon 8 site
 
 ## Local setup
