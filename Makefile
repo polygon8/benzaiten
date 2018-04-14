@@ -15,4 +15,4 @@ runserver:
 	pipenv run ./manage.py runserver
 
 test:
-	pipenv run ./manage.py test
+	pipenv run pytest
