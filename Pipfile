@@ -16,6 +16,7 @@ django-allauth = "*"
 django-crispy-forms = "*"
 flake8 = "*"
 psycopg2 = "*"
+pytest-django = "*"
 
 
 [dev-packages]
