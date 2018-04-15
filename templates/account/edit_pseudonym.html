@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Edit Profile{% endblock %}
+{% block title %}Edit Pseudonym{% endblock %}
 
 {% block content %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <div class="container">
-    <h3>Edit profile</h3>
+    <h3>Edit pseudonym</h3>
     <form action="" method="post">
         {% csrf_token %}
         <ul class="list-group">
