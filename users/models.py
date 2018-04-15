@@ -28,6 +28,7 @@ class IpiNumber(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     number = models.CharField(
         blank=True,
+        unique=True,
         max_length=13,
         validators=[
             RegexValidator(
@@ -37,6 +38,8 @@ class IpiNumber(models.Model):
         ]
     )
     ipi_type = models.CharField(blank=True, max_length=4)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.number
