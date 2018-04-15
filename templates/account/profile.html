@@ -21,9 +21,16 @@
   <h3>Pseudonyms</h3>
   <ul class="list-group">
     {% for pseudonym in pseudonyms %}
-    <li class="list-group-item">{{ pseudonym.name }}</li>
+    <li class="list-group-item">
+      {{ pseudonym.name }}
+      <div class="d-flex">
+        <a class="btn-sm btn-outline-primary" href={% url 'edit-pseudonym' pseudonym.id %} role="button">Edit</a>
+        <a class="btn-sm btn-outline-danger" href={% url 'delete-pseudonym' pseudonym.id %} role="button">Delete</a>
+      </div>
+    </li>
     {% endfor %}
   </ul>
+  <a class="btn btn-success mt-2" href={% url 'pseudonyms' user.id %} role="button">Add</a>
 </div>
 
 <div class="container mt-5">

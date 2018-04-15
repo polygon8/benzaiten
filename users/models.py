@@ -45,8 +45,11 @@ class IpiNumber(models.Model):
 class Pseudonym(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('profile', kwargs={'user_id': self.user.pk})
 
     def __str__(self):
         return self.name
