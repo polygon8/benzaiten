@@ -9,11 +9,7 @@ urlpatterns = [
         views.CustomUserChangeForm.as_view(),
         name='edit-profile'
     ),
-    path(
-        'pseudonyms/<int:user_id>',
-        views.pseudonyms,
-        name='pseudonyms'
-    ),
+    path('pseudonyms/<int:user_id>', views.pseudonyms, name='pseudonyms'),
     path(
         'pseudonyms/<int:pk>/edit>',
         views.PseudonymChangeForm.as_view(),
@@ -23,5 +19,16 @@ urlpatterns = [
         'pseudonyms/<int:pseudonym_id>/delete',
         views.delete_pseudonym,
         name='delete-pseudonym'
+    ),
+    path('ipi-numbers/', views.ipi_numbers, name='ipi-numbers'),
+    path(
+        'ipi-numbers/<int:pk>/edit',
+        views.IpiNumberChangeForm.as_view(),
+        name='edit-ipi-number'
+    ),
+    path(
+        'ipi-numbers/<int:ipi_number_id>/delete',
+        views.delete_ipi_number,
+        name='delete-ipi-number'
     )
 ]

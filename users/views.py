@@ -3,8 +3,8 @@ from django.views import generic
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 
-from .forms import CustomUserCreationForm
-from .models import CustomUser, Pseudonym
+from .forms import CustomUserCreationForm, IpiNumberCreationForm
+from .models import CustomUser, Pseudonym, IpiNumber
 
 
 def profile(request, user_id):
@@ -46,6 +46,43 @@ def delete_pseudonym(request, pseudonym_id):
     return redirect(reverse('profile', kwargs={'user_id': pseudonym.user.id}))
 
 
+def ipi_numbers(request):
+    if request.method == 'GET':
+        form = IpiNumberCreationForm()
+
+        return render(
+            request,
+            'account/ipi_numbers.html',
+            {'form': form}
+        )
+    elif request.method == 'POST':
+        form = IpiNumberCreationForm(request.POST)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.ipi_type = IpiNumber.clean_ipi_type(post.number)
+            post.save()
+            return redirect(
+                reverse(
+                    'profile',
+                    kwargs={'user_id': request.user.id}
+                )
+            )
+
+        return render(
+            request,
+            'account/ipi_numbers.html',
+            {'form': form}
+        )
+
+
+def delete_ipi_number(request, ipi_number_id):
+    ipi_number = get_object_or_404(IpiNumber, pk=ipi_number_id)
+    ipi_number.delete()
+    return redirect(reverse('profile', kwargs={'user_id': ipi_number.user.id}))
+
+
 class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
@@ -62,3 +99,9 @@ class PseudonymChangeForm(generic.UpdateView):
     model = Pseudonym
     fields = ['name']
     template_name = 'account/edit_pseudonym.html'
+
+
+class IpiNumberChangeForm(generic.UpdateView):
+    model = IpiNumber
+    fields = ['number']
+    template_name = 'account/edit_ipi_number.html'
