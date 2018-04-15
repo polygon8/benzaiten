@@ -37,9 +37,16 @@
   <h3>IPI Numbers</h3>
   <ul class="list-group">
     {% for ipi_number in ipi_numbers %}
-    <li class="list-group-item">{{ ipi_number.number }}</li>
+    <li class="list-group-item">
+      {{ ipi_number.number }}
+      <div class="d-flex">
+        <a class="btn-sm btn-outline-primary" href={% url 'edit-ipi-number' ipi_number.id %} role="button">Edit</a>
+        <a class="btn-sm btn-outline-danger" href={% url 'delete-ipi-number' ipi_number.id %} role="button">Delete</a>
+      </div>
+    </li>
     {% endfor %}
   </ul>
+  <a class="btn btn-success mt-2" href={% url 'ipi-numbers' %}  role="button">Add</a>
 </div>
 {% endblock content %}
 

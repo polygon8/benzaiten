@@ -1,3 +1,5 @@
+import re
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import RegexValidator
@@ -41,8 +43,27 @@ class IpiNumber(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def get_absolute_url(self):
+        return reverse('profile', kwargs={'user_id': self.user.pk})
+
     def __str__(self):
         return self.number
+
+    @staticmethod
+    def clean_ipi_type(number):
+        """
+        Base Number
+        Name Number
+        CAE Number
+        """
+        if number[0].isalpha():
+            return 'Base'
+        elif re.search('^\d{11}$', number):
+            return 'Name'
+        elif re.search('^\d{9}$', number):
+            return 'CAE'
+        else:
+            return 'N/A'  # Perhaps raise error here instead?
 
 
 class Pseudonym(models.Model):
