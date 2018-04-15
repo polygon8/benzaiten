@@ -9,7 +9,7 @@ urlpatterns = [
         views.CustomUserChangeForm.as_view(),
         name='edit-profile'
     ),
-    path('pseudonyms/<int:user_id>', views.pseudonyms, name='pseudonyms'),
+    path('pseudonyms/', views.pseudonyms, name='pseudonyms'),
     path(
         'pseudonyms/<int:pk>/edit>',
         views.PseudonymChangeForm.as_view(),

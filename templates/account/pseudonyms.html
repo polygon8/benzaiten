@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}Profile{% endblock %}
 
 {% block content %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% include 'errors/form_errors.html' %}
 
 <div class="container">
     <h3>Add pseudonym</h3>
-    <form action={% url 'pseudonyms' user.id %} method="post">
+    <form action={% url 'pseudonyms'%} method="post">
       {% csrf_token %}
-      <label for="name">Name: </label>
-      <input id="name" type="text" name="name">
-      <input type="submit" value="Save">
+      <ul class="list-group">
+          {{ form|crispy }}
+          </ul>
+          <button class="btn btn-success" type="submit">Save</button>
+          <a class="btn btn-secondary ml-2" href={% url 'profile' user.id %} role="button">Cancel</a>
     </form>
 </div>
 {% endblock content %}
