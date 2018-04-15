@@ -3,7 +3,7 @@ from django.views import generic
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 
-from .forms import CustomUserCreationForm, IpiNumberCreationForm
+from .forms import CustomUserCreationForm, PseudonymCreationForm, IpiNumberCreationForm # noqa
 from .models import CustomUser, Pseudonym, IpiNumber
 
 
@@ -22,22 +22,32 @@ def profile(request, user_id):
     )
 
 
-def pseudonyms(request, user_id):
-    user = get_object_or_404(CustomUser, pk=user_id)
-
+def pseudonyms(request):
     if request.method == 'GET':
-        pseudonyms = user.pseudonym_set.all()
         return render(
             request,
             'account/pseudonyms.html',
-            {'pseudonyms': pseudonyms}
+            {'form': PseudonymCreationForm()}
         )
     elif request.method == 'POST':
-        Pseudonym.objects.create(
-            name=request.POST.get('name'),
-            user=user
+        form = PseudonymCreationForm(request.POST)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect(
+                reverse(
+                    'profile',
+                    kwargs={'user_id': request.user.id}
+                )
+            )
+
+        return render(
+            request,
+            'account/pseudonyms.html',
+            {'form': form}
         )
-        return redirect(reverse('profile', kwargs={'user_id': user.id}))
 
 
 def delete_pseudonym(request, pseudonym_id):
@@ -48,12 +58,10 @@ def delete_pseudonym(request, pseudonym_id):
 
 def ipi_numbers(request):
     if request.method == 'GET':
-        form = IpiNumberCreationForm()
-
         return render(
             request,
             'account/ipi_numbers.html',
-            {'form': form}
+            {'form': IpiNumberCreationForm()}
         )
     elif request.method == 'POST':
         form = IpiNumberCreationForm(request.POST)

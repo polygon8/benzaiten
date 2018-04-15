@@ -18,6 +18,12 @@ class CustomUserChangeForm(UserChangeForm):
         fields = UserChangeForm.Meta.fields
 
 
+class PseudonymCreationForm(forms.ModelForm):
+    class Meta:
+        model = Pseudonym
+        fields = ('name',)
+
+
 class PseudonymChangeForm(forms.ModelForm):
     class Meta:
         model = Pseudonym

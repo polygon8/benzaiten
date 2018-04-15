@@ -5,7 +5,7 @@
 
 {% block content %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% include 'errors/form_errors.html' %}
 
 <div class="container">
     <h3>Edit profile</h3>
@@ -15,6 +15,7 @@
         {{ form|crispy }}
         </ul>
         <button class="btn btn-success" type="submit">Save</button>
+        <a class="btn btn-secondary ml-2" href={% url 'profile' user.id %} role="button">Cancel</a>
     </form>
 </div>
 {% endblock content %}
