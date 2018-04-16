@@ -10,4 +10,6 @@ urlpatterns = [
     # User management
     path('users/', include('users.urls')),
     path('accounts/', include('allauth.urls')),
+
+    path('media/', include('media.urls')),
 ]
