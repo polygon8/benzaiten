@@ -69,7 +69,6 @@ def ipi_numbers(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
-            post.ipi_type = IpiNumber.clean_ipi_type(post.number)
             post.save()
             return redirect(
                 reverse(

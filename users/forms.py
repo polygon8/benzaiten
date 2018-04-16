@@ -48,6 +48,3 @@ class IpiNumberCreationForm(forms.ModelForm):
     class Meta:
         model = IpiNumber
         fields = ('number',)
-        widgets = {
-            'ipi_type': forms.HiddenInput(),
-        }
