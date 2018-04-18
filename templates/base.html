@@ -33,6 +33,8 @@
                 {{ user.username }}
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+                <a class="dropdown-item" href="{% url 'tracks' %}">Tracks</a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'profile' user.id %}">Profile</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'account_change_password' %}">Change password</a>

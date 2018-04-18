@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Tracks{% endblock %}
+
+{% block content %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<div class="container mt-5">
+  <h3>{{ display_name }}'s Tracks</h3>
+  <a class="btn btn-success mt-2 mb-2" href={% url 'add-track' %} role="button">Add</a>
+  <ul class="list-group">
+    {% for track in tracks %}
+    <li class="list-group-item">
+      {{ track.title }}
+      <div class="d-flex">
+        <a class="btn-sm btn-outline-primary" href={% url 'edit-track' track.id %} role="button">Edit</a>
+        <a class="btn-sm btn-outline-danger" href={% url 'delete-track' track.id %} role="button">Delete</a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock content %}
+
