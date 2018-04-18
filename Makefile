@@ -11,6 +11,10 @@ lint:
 migrate:
 	pipenv run ./manage.py migrate
 
+requirements:
+	pipenv lock -r > ./requirements.txt
+	pipenv lock -r --dev > ./requirements-dev.text
+
 runserver:
 	pipenv run ./manage.py runserver
 
