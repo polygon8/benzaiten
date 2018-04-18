@@ -15,10 +15,10 @@ $ pipenv install
 $ pipenv shell # activates the virtualenv
 ```
 
-Set up the initial migration. Currently this is only for `users`.
+Set up the initial migrations.
 
 ```
-$ python manage.py makemigrations users
+$ python manage.py makemigrations
 $ python manage.py migrate
 ```
 
