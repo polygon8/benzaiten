@@ -6,7 +6,7 @@ from django.shortcuts import (
 from django.urls import reverse
 from django.views import generic
 
-from .models import Track
+from .models import Track, IsrcNumber
 from .forms import TrackCreationForm
 
 
@@ -38,6 +38,7 @@ def add_track(request):
             track = form.save(commit=False)
             track.user = request.user
             track.save()
+            IsrcNumber.objects.create(track=track)
             return redirect(reverse('tracks'))
 
         return render(
