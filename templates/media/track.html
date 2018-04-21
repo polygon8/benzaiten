@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Pseudonym{% endblock %}
+{% block title %}Track{% endblock %}
 
 {% block content %}
 
 {% include 'errors/form_errors.html' %}
 
 <div class="container">
-  <h3>Add pseudonym</h3>
-  <form action={% url 'pseudonyms' %} method="post">
+  <h3>Add track</h3>
+  <form action={% url 'add-track' %} method="post">
     {% csrf_token %}
 
     <ul class="list-group">
       {{ form|crispy }}
     </ul>
     <button class="btn btn-success" type="submit">Save</button>
-    <a class="btn btn-secondary ml-2" href={% url 'profile' user.id %} role="button">Cancel</a>
+    <a class="btn btn-secondary ml-2" href={% url 'tracks' %} role="button">Cancel</a>
   </form>
 </div>
 {% endblock content %}

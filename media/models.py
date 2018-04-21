@@ -1,5 +1,7 @@
 from datetime import datetime
+
 from django.db import models
+from django.urls import reverse
 
 from users.models import CustomUser
 
@@ -22,6 +24,9 @@ class Media(models.Model):
 
 class Track(Media):
     bpm = models.PositiveIntegerField(blank=True, null=True)
+
+    def get_absolute_url(self):
+        return reverse('tracks')
 
 
 class IsrcNumber(models.Model):
