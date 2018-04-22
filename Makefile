@@ -1,5 +1,10 @@
 SHELL := /bin/bash
 
+bootstrap: create_db install migrate
+
+create_db:
+	psql -c 'create database benzaiten;' -U postgres
+
 install:
 	pip install pipenv
 	pipenv lock
