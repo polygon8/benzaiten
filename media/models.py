@@ -4,9 +4,17 @@ from django.db import models
 from django.urls import reverse
 
 from users.models import CustomUser
+from .utils import Choices
 
 
 class Media(models.Model):
+    class OriginCodes(Choices):
+        C = 'Commercial (C)'
+        L = 'Library music (L)'
+        P = 'Live performance (P)'
+        V = 'Music video (V)'
+        X = 'Specially commissioned score (X)'
+
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.CharField(blank=True, max_length=255)
@@ -14,6 +22,16 @@ class Media(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     year = models.PositiveIntegerField(blank=True, null=True)
     duration = models.TimeField(blank=True, null=True)
+    origin_code = models.CharField(
+        max_length=1,
+        blank=True,
+        choices=OriginCodes.choices()
+    )
+
+    def origin_code_description(self):
+        return next(
+            v for k, v in self.OriginCodes.choices() if k == self.origin_code
+        )
 
     def __str__(self):
         return self.title
@@ -42,6 +60,16 @@ class IsrcNumber(models.Model):
         self.number = self.generate()
         super().save(*args, **kwargs)
 
+    def formatted_number(self):
+        return '-'.join(
+            (
+                self.number[0:2],
+                self.number[2:5],
+                self.number[5:7],
+                self.number[-5:],
+            )
+        )
+
     def generate(self):
         """
         ISRC Numbers have the following structure:
@@ -67,6 +95,7 @@ class IsrcNumber(models.Model):
         except IsrcNumber.DoesNotExist:
             latest = None
 
+        # This will also need to allow non PG8 numbers in the future
         if not latest or self.this_year() != latest.number[5:7]:
             next_designation_code = 1
         else:

@@ -15,6 +15,7 @@ class TrackCreationForm(forms.ModelForm):
             'year',
             'duration',
             'bpm',
+            'origin_code'
         )
 
 

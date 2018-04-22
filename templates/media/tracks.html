@@ -12,9 +12,27 @@
   <ul class="list-group">
     {% for track in tracks %}
     <li class="list-group-item">
-      <p>{{ track.title }}</p>
-      <p>{{ track.description }}</p>
-      <p>{{ track.isrcnumber.number }}</p>
+      <p>
+        Title: {{ track.title }}
+      </p>
+      <p>
+        Description: {% if track.description %} {{track.description}} {% else %} &nbsp; {% endif %}
+      </p>
+      <p>
+          Year: {% if track.year %} {{track.year}} {% else %} &nbsp; {% endif %}
+      </p>
+      <p>
+        Duration: {% if track.duration %} {{track.duration}} {% else %} &nbsp; {% endif %}
+      </p>
+      <p>
+        BPM: {% if track.bpm %} {{track.bpm}} {% else %} &nbsp; {% endif %}
+      </p>
+      <p>
+        IRSC Number: {% if track.isrcnumber.number %} {{track.isrcnumber.formatted_number}} {% else %} &nbsp; {% endif %}
+      </p>
+      <p>
+        Origin Code: {% if track.origin_code %} {{track.origin_code_description}} {% else %} &nbsp; {% endif %}
+      </p>
       <div class="d-flex">
         <a class="btn-sm btn-outline-primary" href={% url 'edit-track' track.id %} role="button">Edit</a>
         <a class="btn-sm btn-outline-danger" href={% url 'delete-track' track.id %} role="button">Delete</a>

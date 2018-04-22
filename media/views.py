@@ -61,6 +61,7 @@ class TrackChangeForm(generic.UpdateView):
         'description',
         'year',
         'duration',
-        'bpm'
+        'bpm',
+        'origin_code'
     ]
     template_name = 'media/edit_track.html'
