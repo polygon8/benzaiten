@@ -4,17 +4,10 @@ from django.db import models
 from django.urls import reverse
 
 from users.models import CustomUser
-from .utils import Choices
+from .choices import OriginCodes
 
 
 class Media(models.Model):
-    class OriginCodes(Choices):
-        C = 'Commercial (C)'
-        L = 'Library music (L)'
-        P = 'Live performance (P)'
-        V = 'Music video (V)'
-        X = 'Specially commissioned score (X)'
-
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.CharField(blank=True, max_length=255)
