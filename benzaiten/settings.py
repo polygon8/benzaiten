@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'users',
     'pages',
     'media',
+    'cues',
 ]
 
 MIDDLEWARE = [
