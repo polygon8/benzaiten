@@ -12,4 +12,5 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
     path('media/', include('media.urls')),
+    path('cues/', include('cues.urls')),
 ]

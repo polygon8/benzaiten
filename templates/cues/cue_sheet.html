@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Cue Sheet{% endblock %}
+
+{% block content %}
+
+{% include 'errors/form_errors.html' %}
+
+<div class="container">
+  <h3>{{ cue_sheet.programme_title }}</h3>
+  <div class="mb-4">
+    <a class="btn-sm btn-primary mb-5" href={% url 'cue-sheets' %} role="button">Edit</a>
+    <a class="btn-sm btn-danger ml-2" href={% url 'cue-sheets' %} role="button">Back</a>
+  </div>
+
+    <ul class="list-group">
+      <p>
+          Production Company: {{ cue_sheet.production_company }}
+      </p>
+      <p>
+          Classification: {{ cue_sheet.classification }}
+      </p>
+      <p>
+          Catalogue Number: {{ cue_sheet.catalogue_number }}
+      </p>
+      <p>
+          Country: {{ cue_sheet.country }}
+      </p>
+      <p>
+          Programme Duration: {{ cue_sheet.programm_duration }}
+      </p>
+      <p>
+          Music Duration: {{ cue_sheet.music_duration }}
+      </p>
+    </ul>
+    <a class="btn btn-success" href={% url 'add-cue' cue_sheet.id %} role="button">Add cue</a>
+
+    <div class="container mt-4">
+      <h3>Cues</h3>
+      <ul class="list-group">
+        {% for cue in cues %}
+        <li class="list-group-item">
+          <p>{{ cue.title }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+</div>
+{% endblock content %}

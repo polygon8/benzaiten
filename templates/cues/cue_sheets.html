@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Cue Sheets{% endblock %}
+
+{% block content %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<div class="container mt-5">
+  <h3>{{ display_name }}'s Cue Sheets</h3>
+  <a class="btn btn-success mt-2 mb-2" href={% url 'add-cue-sheet' %} role="button">Add</a>
+  <ul class="list-group">
+    {% for sheet in cue_sheets %}
+    <li class="list-group-item">
+      <p>
+        <a href={% url 'cue-sheet' sheet.id %}>{{ sheet.programme_title }}</a>
+      </p>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock content %}
