@@ -11,7 +11,7 @@ python_version = "3.6"
 
 [packages]
 
-django = "*"
+django = "==2.0.5"
 django-allauth = "*"
 django-crispy-forms = "*"
 django-extensions = "*"
