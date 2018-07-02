@@ -3,10 +3,13 @@ SHELL := /bin/bash
 bootstrap: create_db install migrate
 
 create_db:
+	psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='postgres'" | grep -q 1 || createuser postgres
+	psql -c 'alter user postgres createdb;'
 	psql -c 'create database benzaiten;' -U postgres
 
 install:
 	pip install pipenv
+	pipenv shell
 	pipenv lock
 	pipenv install --dev
 
