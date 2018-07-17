@@ -11,7 +11,7 @@ from .forms import TrackCreationForm
 
 
 def tracks(request):
-    tracks = Track.objects.filter(user=request.user)
+    tracks = Track.objects.filter(user=request.user).order_by('-updated_at')
     display_name = request.user.name if request.user.name else request.user.email.split('@')[0] # noqa
 
     return render(
