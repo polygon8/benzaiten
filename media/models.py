@@ -42,7 +42,7 @@ class Track(Media):
 
 class IsrcNumber(models.Model):
     COUNTRY_CODE = 'GB'
-    REGISTRANT_CODE = 'PG8'
+    REGISTRANT_CODE = 'GGN'
 
     track = models.OneToOneField(Track, on_delete=models.CASCADE)
     number = models.CharField(max_length=12, unique=True)
