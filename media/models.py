@@ -23,7 +23,7 @@ class Media(models.Model):
 
     def origin_code_description(self):
         return next(
-            v for k, v in self.OriginCodes.choices() if k == self.origin_code
+            v for k, v in OriginCodes.choices() if k == self.origin_code
         )
 
     def __str__(self):
