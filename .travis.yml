@@ -3,13 +3,14 @@ python:
   - '3.6.5'
 services:
   - postgresql
-env:
-  - PIPENV_IGNORE_VIRTUALENVS=1
 install:
-  - make bootstrap
+  - pip install -r requirements.txt
+before_script:
+  - make create_db
+  - python ./manage.py migrate
 script:
-  - make lint
-  - make test
+  - flake8
+  - pytest
 notifications:
   email: false
   slack:
