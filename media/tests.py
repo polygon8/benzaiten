@@ -34,7 +34,7 @@ class IsrcNumberTest(TestCase):
         create_isrc_numbers(Track.objects.all())
 
         self.assertEqual(
-            'GBPG81800001',
+            'GBGGN1800001',
             IsrcNumber.objects.first().number
         )
 
@@ -44,7 +44,7 @@ class IsrcNumberTest(TestCase):
         create_isrc_numbers(Track.objects.all())
 
         self.assertEqual(
-            'GBPG81800002',
+            'GBGGN1800002',
             IsrcNumber.objects.last().number
         )
 
@@ -54,11 +54,11 @@ class IsrcNumberTest(TestCase):
         create_track()
 
         number_from_2017 = IsrcNumber(track=Track.objects.first())
-        number_from_2017.number = 'GBPG81712345'
+        number_from_2017.number = 'GBGGN1712345'
         latest_isrc_number.query.latest.return_value = number_from_2017
         create_track()
 
         self.assertEqual(
-            'GBPG81800001',
+            'GBGGN1800001',
             IsrcNumber(track=Track.objects.last()).generate()
         )
